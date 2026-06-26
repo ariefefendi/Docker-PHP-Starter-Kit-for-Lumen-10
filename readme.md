@@ -134,17 +134,24 @@ Nginx-->>User: HTTP Response
 flowchart LR
 
     A["Clone Repository"]
-    B["docker-compose up -d --build"]
-    C["Docker Containers Running"]
-    D["Run install_lumen10.sh"]
-    E["Lumen 10 Installed"]
-    F["Start Development"]
+    B["Build Docker Images"]
+    C["Start Containers"]
+    D["Install Lumen 10"]
+    E["Generate APP_KEY"]
+    F["Application Ready"]
 
     A --> B
     B --> C
     C --> D
     D --> E
     E --> F
+
+    style A fill:#E3F2FD
+    style B fill:#FFF3E0
+    style C fill:#E8F5E9
+    style D fill:#FFFDE7
+    style E fill:#F3E5F5
+    style F fill:#E8F5E9
 ```
 
 ---
