@@ -24,8 +24,9 @@ phpMyAdmin["phpMyAdmin"]
 
 --> DB
 
-# System Architecture
+```
 
+# System Architecture
 ```mermaid
 flowchart LR
 
