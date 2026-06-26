@@ -128,25 +128,23 @@ Nginx-->>User: HTTP Response
 
 ---
 
-# Project Bootstrap Flow
+## Project Bootstrap Flow
 
 ```mermaid
 flowchart LR
 
-Clone Repository
+    A["Clone Repository"]
+    B["docker-compose up -d --build"]
+    C["Docker Containers Running"]
+    D["Run install_lumen10.sh"]
+    E["Lumen 10 Installed"]
+    F["Start Development"]
 
---> DockerCompose["docker-compose up -d --build"]
-
---> Containers["Containers Running"]
-
---> Install["bash install_lumen10.sh"]
-
---> Ready["Lumen Ready"]
-
---> Development["Start Development"]
-
---> API["Build REST API"]
-
+    A --> B
+    B --> C
+    C --> D
+    D --> E
+    E --> F
 ```
 
 ---
