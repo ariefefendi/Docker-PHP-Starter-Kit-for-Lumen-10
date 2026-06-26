@@ -1,0 +1,74 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: lumen-app # ✅ adjust to your project name.
+    volumes:
+      - ./src:/var/www
+      - ./install_lumen10.sh:/var/www/install_lumen10.sh # ✅ tambahin ini
+    depends_on:
+      - mysql
+    networks:
+      - lumen-net # ✅ adjust to your project name.
+
+  mysql:
+    image: mysql:8.0
+    container_name: lumen-mysql # ✅ adjust to your project name.
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: db_lumen_api # ✅ can be changed according to the project
+      MYSQL_USER: laravel313Arief
+      MYSQL_PASSWORD: secret313
+      MYSQL_ROOT_PASSWORD: root212
+    ports:
+      - "3309:3306" # ✅ make sure the ports do not conflict
+    volumes:
+      - db_data:/var/lib/mysql
+    networks:
+      - lumen-net
+
+  nginx:
+    image: nginx:alpine
+    container_name: lumen-nginx # ✅ adjust to your project name.
+    ports:
+      - "8082:80" # ✅ changed port publik (8082, 8083 dst)
+    volumes:
+      - ./src:/var/www
+      - ./nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - lumen-net
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin:latest
+    container_name: lumen-phpmyadmin # ✅ adjust to your project name.
+    restart: unless-stopped
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: root212
+    ports:
+      - "9092:80" # ✅ make sure the port is different
+    depends_on:
+      - mysql
+    networks:
+      - lumen-net
+
+volumes:
+  db_data:
+
+
+networks:
+  lumen-net:
+    # ✅ change to project name ... -net
+
+
+    # running
+    # masuk : cd F:\docker\lumen-api
+    # docker-compose up -d --build
+    # http://localhost:8080
