@@ -52,7 +52,7 @@ services:
       PMA_PORT: 3306
       PMA_USER: root
       PMA_PASSWORD: root212
-      - UPLOAD_LIMIT=50M   # Enforces a maximum file import size of 50 Megabytes
+      UPLOAD_LIMIT: 50M   # Enforces a maximum file import size of 50 Megabytes
     ports:
       - "9092:80" # ✅ make sure the port is different
     depends_on:
